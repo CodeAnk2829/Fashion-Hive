@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/loginStyle.css">
+    <title>Log In</title>
+</head>
+
+<body>
+    <div class="loginBox">
+        <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+        <h3>Sign in</h3>
+        <form action="/login" method="post">
+            <div class="error-message">
+                <% if (locals.errorMessage && locals.errorMessage.length> 0) { %>
+                    <!-- Display the error message with red color -->
+                    <p style="color: red; margin-top: 0; margin-bottom: 5px;">
+                        <%= locals.errorMessage %>
+                    </p>
+                    <% } %>
+            </div>
+            <div class="inputBox">
+                <input id="uname" type="email" name="username" placeholder="Email" autocomplete="off" required>
+                <input id="pass" type="password" name="password" placeholder="Password" autocomplete="off" required>
+                <a href="/forgot" id="forgot">Forgot Password?</a>
+            </div>
+            <input type="submit" name="submit" value="Sign in">
+        </form>
+        <p> Not registered? <a href="/register">Create an account</a></p>
+        <p>OR</p>
+        <div class="socials">
+            <a href="/auth/google"><img class="icon" src="img/socials/google-icon.png" alt="google-login"></a>
+        </div>
+
+    </div>
+</body>
+
+</html>
