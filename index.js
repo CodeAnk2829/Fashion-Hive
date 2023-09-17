@@ -10,8 +10,6 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import findOrCreate from "mongoose-findorcreate";
 import flash from "connect-flash";
 import nodemailer from "nodemailer";
-
-
 const app = express();
 const port = 3000;
 const transporter = nodemailer.createTransport({
