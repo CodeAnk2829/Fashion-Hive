@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const connectDatabase=()=>{
 mongoose.set('strictQuery', true)
- mongoose.connect(process.env.DB_URL,{
+ mongoose.connect("mongodb://127.0.0.1:27017/shoppingDB",{
     
         useNewUrlParser:true,
         useUnifiedTopology:true,
@@ -13,4 +13,4 @@ mongoose.set('strictQuery', true)
         console.log('err.connectiong.database'+err.message)
     })
 };
-module.exports=connectDatabase
+module.exports=connectDatabase;

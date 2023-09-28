@@ -1,5 +1,5 @@
 const express =require("express");
-const router =express.Router();
+const router = express.Router();
 const {newOrder, getSingleOrder, getMyOrders, getAllOrders, updateOrder, deleteOrder} =require("../controllers/orderController.js")
 const {isAuthenticatedUser,authorizeRoles} =require("../middleware/auth");
 router.route("/order/new").post(isAuthenticatedUser,newOrder);
@@ -10,4 +10,4 @@ router.route("/admin/orders").get(isAuthenticatedUser,authorizeRoles("admin"),ge
 router.route("/admiin/order/:id").put(isAuthenticatedUser,authorizeRoles("admin"),updateOrder).
 delete(isAuthenticatedUser,authorizeRoles("admin"),deleteOrder);
 
-module.exports =router;
+module.exports = router;

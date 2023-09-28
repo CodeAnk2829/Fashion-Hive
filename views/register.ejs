@@ -12,11 +12,12 @@
 
 <body>
     <div class="loginBox">
-        <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+        <!-- <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px"> -->
         <h3>Sign up</h3>
         <form action="/register" method="post">
             <div class="inputBox">
-                <input id="uname" type="email" name="username" placeholder="Email" autocomplete="off" required>
+                <input id="user-name" type="text" name="name" placeholder="Full Name">
+                <input id="user-email" type="email" name="email" placeholder="Email" autocomplete="off" required>
                 <input id="pass" type="password" name="password" placeholder="Password" autocomplete="off" required>
             </div>
             <input type="submit" name="submit" value="Sign up">

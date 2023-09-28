@@ -8,7 +8,7 @@ const options ={
 };
     res.status(statusCode).cookie("token",token,options).json({
         success:true,
-        message:"registration successfully check your email to verify",
+        message:"Registred successfully! Check your email to verify",
         user,
         token,
     });

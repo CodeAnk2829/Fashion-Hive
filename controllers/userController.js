@@ -1,39 +1,44 @@
 const ErrorHander = require('../utils/errorhander');
 const sendToken = require('../utils/jwtToken');
 const catchAsyncErrors=require('../middleware/catchAsyncErrors');
-const User =require("../models/userModels.js");
+const User = require("../models/userModels.js");
 const sendEmail=require("../utils/Mail.js");
 const crypto=require("crypto");
 const { json } = require('body-parser');
 const cloudinary=require("cloudinary");
 
 //Register User
-exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
-    const {name,email,password} =req.body;
-    const mycloud=await cloudinary.v2.uploader.upload(req.body.avatar,{
-        folder:"avatars",
-        width:150,
-        crop:"scale"    
-    });
-    console.log("after mycloud");
+exports.getRegisterPage = async(req, res) => {
+    res.render('register');
+}
+
+exports.registerUser = catchAsyncErrors(async (req,res,next)=>{
+    const {name, email, password} = req.body;
+  
+    // const mycloud=await cloudinary.v2.uploader.upload(req.body.avatar,{
+    //     folder:"avatars",
+    //     width:150,
+    //     crop:"scale"    
+    // });
+    // console.log("after mycloud");
     
-    const user =await User.create({
-        name,
-        email,
-        password,
-       avatar:{
-           public_id:mycloud.public_id,
-           url:mycloud.secure_url,
-       },
-       resetPasswordToken:"",
-   });
-//    console.log(user._id);
-   const resetPasswordToken=await user.getResetPasswordToken();
-   user.resetPasswordToken=resetPasswordToken
-   await user.save();
-  sendEmail(email,resetPasswordToken);
-   console.log(req.params.id);
-   sendToken(user,201,res);
+    const user = new User({
+        name: name,
+        email: email,
+        password: password,
+        // avatar:{
+        //     public_id:mycloud.public_id,
+        //     url:mycloud.secure_url,
+        // },
+        resetPasswordToken:"",
+    });
+    console.log(user);
+    const resetPasswordToken = await user.getResetPasswordToken();
+    user.resetPasswordToken = resetPasswordToken
+    await user.save();
+    sendEmail(email,resetPasswordToken);
+    console.log(req.params.id);
+    sendToken(user,201,res);
 })
 
 //email verification
@@ -50,10 +55,13 @@ exports.verification =catchAsyncErrors(async(req,res,next)=>{
     res.json({ message: 'Email verification successful.' });
 });
 
+exports.getLoginPage = async (req, res) => {
+    res.render('login');
+}
 
 //login user
 exports.loginUser = catchAsyncErrors(async(req,res,next)=>{
-    const {email,password} =req.body;
+    const {email,password} = req.body;
     //checking if user has given password and email both
     if(!email || !password){
         return next(new ErrorHander("please enter email & password",400));

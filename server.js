@@ -13,11 +13,11 @@ process.on("uncaughtException",(err)=> {
 
 // import database
 const connectDatabase = require('./config/database.js');
+connectDatabase();
 
 //fetching the configuration and connect;
 
 
-connectDatabase();
 
 cloudinary.config({
     cloud_name:process.env.CLOUD_NAME, 
@@ -26,8 +26,8 @@ cloudinary.config({
 });
 
 //why instead of 6000 process.env.PORT is not working
-const PORT = process.env.PORT || 7000;
-app.listen(7000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(3000, () => {
     console.log(`server is working on http://localhost:${process.env.PORT}`)
 })
 //unhandled promise rejection
